@@ -1,21 +1,26 @@
+
 name: Release
 on:
-  push:
-    branches:
-      - master
+  create:
+    tags:
+    - v*
 
 jobs:
-  build:
-    name: Build
+  release:
+    name: Release on GitHub
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Go
-        uses: actions/setup-go@v1
-        with:
-          go-version: 1.15.6
+    - name: Check out code
+      uses: actions/checkout@v1
 
-      - name: Check out code
-        uses: actions/checkout@v1
+    - name: Validates GO releaser config
+      uses: docker://goreleaser/goreleaser:latest
+      with:
+        args: check
 
-      - name: Build
-        run: make build
+    - name: Create release on GitHub
+      uses: docker://goreleaser/goreleaser:latest
+      with:
+        args: release
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
