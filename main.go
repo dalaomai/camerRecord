@@ -20,6 +20,8 @@ const (
 )
 
 func main() {
+	go rtsp.Record(videosPath)
+
 	var err error
 	client, err := camerRecordClient.New()
 	if err != nil {
@@ -44,26 +46,40 @@ func main() {
 
 	fmt.Printf("文件夹ID:%s\n", parentID)
 
-	go uploadFiles(client, parentID)
-	rtsp.Record(videosPath)
+	uploadFiles(client, parentID)
 }
 
 func uploadFiles(client *camerRecordClient.Client, parentID string) {
+	taskLock := sync.Mutex{}
+	taskChan := make(chan string, 0)
+	wgLock := sync.Mutex{}
 	wg := sync.WaitGroup{}
 
-	task := func(i int, filePath string) {
-		defer wg.Done()
+	task := func(i int) {
+		for {
+			taskLock.Lock()
+			filePath := <-taskChan
+			taskLock.Unlock()
 
-		var err error = nil
-		fmt.Printf("%v 开始上传:%s\n", i, filePath)
+			var err error = nil
+			fmt.Printf("%v 开始上传:%s\n", i, filePath)
 
-		fileID, err := client.CreateFile(filePath, []string{parentID})
-		if err == nil {
-			fmt.Printf("%v 上传成功：%s  %s\n", i, filePath, fileID)
-			os.Remove(filePath)
-		} else {
-			log.Printf("error: %v", err)
+			fileID, err := client.CreateFile(filePath, []string{parentID})
+			if err == nil {
+				fmt.Printf("%v 上传成功：%s  %s\n", i, filePath, fileID)
+				os.Remove(filePath)
+			} else {
+				log.Printf("error: %v", err)
+			}
+
+			wgLock.Lock()
+			wg.Done()
+			wgLock.Unlock()
 		}
+	}
+
+	for i := 0; i < uploadFileNumber; i++ {
+		go task(i)
 	}
 
 	for {
@@ -72,19 +88,18 @@ func uploadFiles(client *camerRecordClient.Client, parentID string) {
 			panic(err)
 		}
 
-		taskNumber := len(files)
-		if taskNumber < 2 {
-			time.Sleep(30 * time.Second)
+		if len(files) < 2 {
+			time.Sleep(1 * time.Second)
 			continue
 		}
-		if taskNumber > uploadFileNumber {
-			taskNumber = uploadFileNumber
-		}
-		taskNumber--
 
-		for i := 0; i < taskNumber; i++ {
+		for i := 0; i < len(files)-1; i++ {
+			log.Printf("debug:%s %v", files[i].Name(), i)
+			taskChan <- videosPath + files[i].Name()
+
+			wgLock.Lock()
 			wg.Add(1)
-			go task(i, videosPath+files[i].Name())
+			wgLock.Unlock()
 		}
 
 		wg.Wait()

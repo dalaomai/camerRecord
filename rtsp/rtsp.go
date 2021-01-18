@@ -12,6 +12,6 @@ const (
 
 // Record ...
 func Record(outputPath string) error {
-	err := ffmpeg.Input(camerURL).Output(outputPath+"%Y-%m-%d_%H-%M-%S.mkv", ffmpeg.KwArgs{"c": "copy", "f": "segment", "strftime": 1, "segment_time": 60, "segment_format": "mkv"}).Run()
+	err := ffmpeg.Input(camerURL).Output(outputPath+"%Y-%m-%d_%H-%M-%S.mkv", ffmpeg.KwArgs{"c": "copy", "f": "segment", "strftime": 1, "segment_time": 20, "segment_format": "mkv"}).Run()
 	return err
 }
