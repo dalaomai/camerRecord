@@ -3,8 +3,8 @@
 package client
 
 import (
-	"camerRecordClient/errors"
-	"camerRecordClient/tokenutil"
+	"camerRecord/errors"
+	"camerRecord/tokenutil"
 	"context"
 	"fmt"
 	"io/ioutil"
