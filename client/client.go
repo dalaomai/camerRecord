@@ -19,8 +19,8 @@ import (
 )
 
 const (
-	credFile  = "config/credentials.json"
-	tokenFile = "config/token.json"
+	credFileName  = "credentials.json"
+	tokenFileName = "token.json"
 
 	// RootFolderID ...
 	RootFolderID = "root"
@@ -91,9 +91,27 @@ func (c Client) SearchFolder(folderName string, parent string) (ids []string, er
 	return ids, nil
 }
 
+// GetOrCreateFolder 获取文件夹ID
+func (c Client) GetOrCreateFolder(folderName string, parent string) (id string, err error) {
+	ids, err := c.SearchFolder(folderName, parent)
+	if err != nil {
+		return "", err
+	}
+	if len(ids) > 0 {
+		return ids[0], nil
+	}
+
+	id, err = c.CreateFolder(folderName, []string{parent})
+	if err != nil {
+		return "", nil
+	}
+
+	return id, err
+}
+
 // New 获取client
-func New() (*Client, error) {
-	cred, err := ioutil.ReadFile(credFile)
+func New(configFolder string) (*Client, error) {
+	cred, err := ioutil.ReadFile(configFolder + credFileName)
 	if err != nil {
 		return nil, errors.NewError(fmt.Sprintf("谷歌API配置文件读取失败: %v", err))
 	}
@@ -104,7 +122,7 @@ func New() (*Client, error) {
 		return nil, errors.NewError(fmt.Sprintf("谷歌API配置文件解析失败: %v", err))
 	}
 
-	client, err := getOauthClient(config)
+	client, err := getOauthClient(config, configFolder)
 	if err != nil {
 		return nil, err
 	}
@@ -113,11 +131,11 @@ func New() (*Client, error) {
 	return &Client{service}, err
 }
 
-func getOauthClient(config *oauth2.Config) (*http.Client, error) {
+func getOauthClient(config *oauth2.Config, configFolder string) (*http.Client, error) {
 	var token *oauth2.Token
 	var err error
 
-	token, err = tokenutil.GetTokenFromFile(tokenFile)
+	token, err = tokenutil.GetTokenFromFile(configFolder + tokenFileName)
 	if err != nil {
 		log.Println(err)
 
@@ -125,7 +143,7 @@ func getOauthClient(config *oauth2.Config) (*http.Client, error) {
 		if err != nil {
 			return nil, err
 		}
-		tokenutil.SaveTokenToFile(tokenFile, token)
+		tokenutil.SaveTokenToFile(configFolder+tokenFileName, token)
 	}
 	return config.Client(context.Background(), token), err
 }

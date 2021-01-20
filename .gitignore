@@ -1,4 +1,5 @@
 .vscode
 .build
-/config/*
+/.config/*
 _*
+config.json
