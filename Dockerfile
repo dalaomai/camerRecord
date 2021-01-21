@@ -13,8 +13,7 @@ RUN apk --no-cache add bash \
     && cd / && rm -rf ${TEMP_PATH}
 
 WORKDIR ${RUN_PATH}}
-# COPY dist/camerRecord_linux_amd64/camerRecord .
-COPY mybin .
+COPY camerRecord .
 
 VOLUME [ "${RUN_PATH}/.config" , "${RUN_PATH}/_temp" ]
 
