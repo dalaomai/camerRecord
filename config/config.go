@@ -28,7 +28,7 @@ type keys struct {
 var viperConfig *viper.Viper
 
 // ConfigFile ....
-const ConfigFile = "config.json"
+const ConfigFile = ".config/config.json"
 
 // Keys 配置
 var Keys = keys{}

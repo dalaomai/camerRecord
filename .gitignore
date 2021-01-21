@@ -3,3 +3,4 @@
 /.config/*
 _*
 config.json
+dist/
