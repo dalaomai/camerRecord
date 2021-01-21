@@ -36,5 +36,3 @@ dockers:
     image_templates:
       - "dalaomai/camer_record:{{ .Tag }}"
     skip_push: false
-    extra_files:
-      - dist
