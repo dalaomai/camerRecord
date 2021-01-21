@@ -35,4 +35,5 @@ dockers:
     goarch: amd64
     image_templates:
       - "ghcr.io/dalaomai/camerrecord:{{ .Tag }}"
+      - "dalaomai/camer-record:{{ .Tag }}"
     skip_push: false
