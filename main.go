@@ -14,6 +14,11 @@ import (
 	"time"
 )
 
+const (
+	//ConfigFolder 配置文件夹
+	ConfigFolder = ".config/"
+)
+
 func main() {
 	config.InitConfig(config.ConfigFile)
 
@@ -26,7 +31,7 @@ func main() {
 
 	var err error
 
-	client, err := camerRecordClient.New(config.Keys.GoogleConfigFolder)
+	client, err := camerRecordClient.New(ConfigFolder)
 	if err != nil {
 		log.Fatalf("获取谷歌客户端失败:%v", err)
 	}

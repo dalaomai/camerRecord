@@ -22,7 +22,6 @@ type keys struct {
 	ConfigFile         string
 	GoogleFolder       string
 	ThreadNumber       int
-	GoogleConfigFolder string
 }
 
 var viperConfig *viper.Viper
