@@ -6,13 +6,16 @@ import (
 	camerRecordClient "camerRecord/client"
 	"camerRecord/config"
 	"camerRecord/rtsp"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"sync"
 	"time"
+
+	"camerRecord/logging"
 )
+
+var logger = logging.GetLogger()
 
 const (
 	//ConfigFolder 配置文件夹
@@ -67,14 +70,14 @@ func uploadFiles(client *camerRecordClient.Client, rootFolderID string) {
 			uploadFiletaskLock.Unlock()
 
 			var err error = nil
-			fmt.Printf("%v 开始上传:%s\n", i, task.srcFile)
+			logger.Debugf("%v 开始上传: %s\n", i, task.srcFile)
 
 			fileID, err := client.CreateFile(task.srcFile, []string{task.dstFileID})
 			if err == nil {
-				fmt.Printf("%v 上传成功：%s  %s\n", i, task.srcFile, fileID)
+				logger.Debugf("%v 上传成功：%s  %s\n", i, task.srcFile, fileID)
 				os.Remove(task.srcFile)
 			} else {
-				log.Printf("error: %v", err)
+				logger.Infof("error: %v", err)
 			}
 
 			wgLock.Lock()
@@ -86,7 +89,7 @@ func uploadFiles(client *camerRecordClient.Client, rootFolderID string) {
 	createTaskFun := func(camer config.Camer) {
 		folderID, err := client.GetOrCreateFolder(camer.Name, rootFolderID)
 		if err != nil {
-			log.Fatalf("创建谷歌文件夹（%v）失败： %v", camer.Name, err)
+			logger.Fatalf("创建谷歌文件夹（%v）失败： %v", camer.Name, err)
 		}
 
 		for {

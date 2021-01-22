@@ -1,5 +1,6 @@
 .vscode
 .build
-/.config/*
+.log
+/.config
 _*
 dist/
