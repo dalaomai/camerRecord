@@ -39,3 +39,5 @@ dockers:
       - "dalaomai/camer-record:{{ .Tag }}"
       - "dalaomai/camer-record:latest"
     skip_push: false
+    extra_files:
+      - .config_template
