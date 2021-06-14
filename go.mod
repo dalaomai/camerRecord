@@ -11,4 +11,4 @@ require (
 	google.golang.org/api v0.36.0
 )
 
-replace github.com/dalaomai/go-onedrive v1.1.2 => /root/go-onedrive
+// replace github.com/dalaomai/go-onedrive v1.1.2 => /root/go-onedrive
