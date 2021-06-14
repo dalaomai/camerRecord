@@ -19,7 +19,7 @@ var logger = logging.GetLogger()
 
 const (
 	//ConfigFolder 配置文件夹
-	ConfigFolder = ".config/"
+	ConfigFolder = ".config"
 )
 
 func main() {
@@ -33,15 +33,21 @@ func main() {
 	}
 
 	var err error
+	var client camerRecordClient.DriveClient
 
-	client, err := camerRecordClient.New(ConfigFolder)
-	if err != nil {
-		log.Fatalf("获取谷歌客户端失败:%v", err)
+	if config.Keys.Drive == "onedrive" {
+		client, err = camerRecordClient.NewOnedriveServiceClient(ConfigFolder)
+	} else if config.Keys.Drive == "google" {
+		client, err = camerRecordClient.NewGoogleDriveClient(ConfigFolder)
 	}
 
-	rootFolderID, err := client.GetOrCreateFolder(config.Keys.GoogleFolder, camerRecordClient.RootFolderID)
+	if err != nil || client == nil {
+		log.Fatalf("获取云盘客户端失败:%v", err)
+	}
+
+	rootFolderID, err := client.GetOrCreateFolder(config.Keys.RootFolder, camerRecordClient.RootFolderID)
 	if err != nil {
-		log.Fatalf("获取谷歌“%v”文件夹失败", config.Keys.GoogleFolder)
+		log.Fatalf("获取根“%v”文件夹失败", config.Keys.RootFolder)
 	}
 
 	uploadFiles(client, rootFolderID)
@@ -57,7 +63,7 @@ type uploadFileTask struct {
 	dstFileID string
 }
 
-func uploadFiles(client *camerRecordClient.Client, rootFolderID string) {
+func uploadFiles(client camerRecordClient.DriveClient, rootFolderID string) {
 	uploadFiletaskLock := sync.Mutex{}
 	uploadFiletaskChan := make(chan uploadFileTask, 0)
 	wgLock := sync.Mutex{}
@@ -72,7 +78,7 @@ func uploadFiles(client *camerRecordClient.Client, rootFolderID string) {
 			var err error = nil
 			logger.Debugf("%v 开始上传: %s\n", i, task.srcFile)
 
-			fileID, err := client.CreateFile(task.srcFile, []string{task.dstFileID})
+			fileID, err := client.CreateFile(task.srcFile, task.dstFileID)
 			if err == nil {
 				logger.Debugf("%v 上传成功：%s  %s\n", i, task.srcFile, fileID)
 				os.Remove(task.srcFile)

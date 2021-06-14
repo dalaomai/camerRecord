@@ -17,11 +17,12 @@ func (camer Camer) GetVideoOputPath() string {
 }
 
 type keys struct {
-	Camers             []Camer
-	VideoOputPath      string
-	ConfigFile         string
-	GoogleFolder       string
-	ThreadNumber       int
+	Camers        []Camer
+	VideoOputPath string
+	ConfigFile    string
+	RootFolder    string
+	ThreadNumber  int
+	Drive         string
 }
 
 var viperConfig *viper.Viper

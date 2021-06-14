@@ -4,12 +4,7 @@
     "ThreadNumber": 4,
     "Camers": [
         {
-            "URL": "rtsp://admin:xxxx456@192.168.1.222:554/stream1",
-            "Name": "camer1",
-            "VideoSegmentTime": 10
-        },
-        {
-            "URL": "rtsp://admin:xxxx@192.168.1.222:554/stream2",
+            "URL": "rtsp://admin:maizhiling456@192.168.1.222:554/stream2",
             "Name": "camer2",
             "VideoSegmentTime": 10
         }
