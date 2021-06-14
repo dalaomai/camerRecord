@@ -4,3 +4,4 @@
 /.config
 _*
 dist/
+local_test.go
