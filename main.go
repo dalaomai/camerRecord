@@ -29,7 +29,12 @@ func main() {
 		filePath := camer.GetVideoOputPath()
 		os.MkdirAll(filePath, os.ModePerm)
 
-		go rtsp.Record(camer.URL, filePath, camer.VideoSegmentTime)
+		go func(camer_ config.Camer) {
+			for {
+				err := rtsp.Record(camer_.URL, filePath, camer_.VideoSegmentTime)
+				logger.Error(err)
+			}
+		}(camer)
 	}
 
 	var err error
