@@ -27,7 +27,7 @@ const (
 	redirectUri              = "http://localhost:1234"
 	authHttpHost             = "localhost"
 	authHttpPort             = "1234"
-	tokenScope               = "offline_access files.readwrite"
+	tokenScope               = "offline_access files.readwrite  Files.ReadWrite.All Sites.ReadWrite.All"
 )
 
 type OneDriveClient struct {

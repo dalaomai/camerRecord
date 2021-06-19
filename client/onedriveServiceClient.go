@@ -42,6 +42,10 @@ func (sc *OnedriveServiceClient) getDrive() error {
 	return nil
 }
 
+func (sc *OnedriveServiceClient) GetDirve() *onedrive.Drive {
+	return sc.drive
+}
+
 func (sc *OnedriveServiceClient) CreateFolder(folderName string, parent string) (id string, err error) {
 	c, err := sc.getDriveClient()
 	if err != nil {
@@ -61,7 +65,7 @@ func (sc *OnedriveServiceClient) CreateFile(filePath string, parent string) (id 
 	if err != nil {
 		return "", err
 	}
-	item, err := c.DriveItems.UploadNewFile(context.TODO(), sc.drive.Id, parent, filePath)
+	item, err := c.DriveItems.UploadLargeFile(context.TODO(), sc.drive.Id, parent, filePath)
 	if err != nil {
 		return "", err
 	}
@@ -104,4 +108,16 @@ func (sc *OnedriveServiceClient) GetOrCreateFolder(folderName string, parent str
 
 	id, err = sc.CreateFolder(folderName, parent)
 	return id, err
+}
+
+func (sc *OnedriveServiceClient) CreateLargeFile(filePath string, parent string) (interface{}, error) {
+	c, err := sc.getDriveClient()
+	if err != nil {
+		return "", err
+	}
+	item, err := c.DriveItems.UploadLargeFile(context.TODO(), sc.drive.Id, parent, filePath)
+	if err != nil {
+		return "", err
+	}
+	return item, nil
 }

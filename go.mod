@@ -3,7 +3,7 @@ module camerRecord
 go 1.15
 
 require (
-	github.com/dalaomai/go-onedrive v1.1.2
+	github.com/dalaomai/go-onedrive v1.1.4
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
 	github.com/spf13/viper v1.7.1
 	github.com/u2takey/ffmpeg-go v0.1.0
@@ -11,4 +11,4 @@ require (
 	google.golang.org/api v0.36.0
 )
 
-// replace github.com/dalaomai/go-onedrive v1.1.2 => /root/go-onedrive
+// replace github.com/dalaomai/go-onedrive v1.1.4 => /root/go-onedrive
