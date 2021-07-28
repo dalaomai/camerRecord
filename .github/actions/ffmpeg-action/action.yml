@@ -15,7 +15,7 @@ runs:
   steps:
     - run: wget https://ffmpeg.org/releases/ffmpeg-3.0.2.tar.gz
       shell: bash
-    - run: tar -zxvf ffmpeg-3.0.2.tar.gz
+    - run: tar -zxf ffmpeg-3.0.2.tar.gz
       shell: bash
-    - run: cp -r ffmpeg-3.0.2/lib* /usr/local/include/
+    - run: sudo cp -r ffmpeg-3.0.2/lib* /usr/local/include/
       shell: bash
