@@ -1,4 +1,4 @@
-FROM dalaomai/camer-record-base:latest
+FROM scratch
 
 ENV RUN_PATH /camerRecord
 
