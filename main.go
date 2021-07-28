@@ -13,6 +13,8 @@ import (
 	"time"
 
 	"camerRecord/logging"
+
+	"github.com/deepch/vdk/cgo/ffmpeg"
 )
 
 var logger = logging.GetLogger()
@@ -23,6 +25,9 @@ const (
 )
 
 func main() {
+	// test build
+	logger.Debug(ffmpeg.INFO)
+
 	config.InitConfig(config.ConfigFile)
 
 	for _, camer := range config.Keys.Camers {
