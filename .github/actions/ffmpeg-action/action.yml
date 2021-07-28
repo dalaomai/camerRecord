@@ -19,7 +19,9 @@ runs:
       shell: bash
     - run: cd ffmpeg-3.0.2
       shell: bash
-    - run: sudo ./configure
+    - run: ./configure
       shell: bash
     - run: sudo cp -r lib* /usr/local/include/
+      shell: bash
+    - run: cd ..
       shell: bash
