@@ -19,7 +19,7 @@ runs:
       shell: bash
     - run: cd ffmpeg-3.0.2
       shell: bash
-    - run: ll
+    - run: ls
       shell: bash
     - run: ./configure
       shell: bash
