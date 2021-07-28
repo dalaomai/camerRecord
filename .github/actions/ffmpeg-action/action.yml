@@ -17,13 +17,7 @@ runs:
       shell: bash
     - run: tar -zxf ffmpeg-3.0.2.tar.gz
       shell: bash
-    - run: cd ./ffmpeg-3.0.2
+    - run: cd ./ffmpeg-3.0.2 && ./configure
       shell: bash
-    - run: ls
-      shell: bash
-    - run: ./configure
-      shell: bash
-    - run: sudo cp -r lib* /usr/local/include/
-      shell: bash
-    - run: cd ..
+    - run: sudo cp -r ffmpeg-3.0.2/lib* /usr/local/include/
       shell: bash
