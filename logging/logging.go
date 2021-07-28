@@ -7,10 +7,10 @@ import (
 )
 
 // Logger ...
-var Logger *logging.Logger
+var logger *logging.Logger
 
 var format = logging.MustStringFormatter(
-	`%{time:2006-1-2 15:04:05.000} - %{longfile} - %{callpath} - %{level:.4s} - %{message}`,
+	`%{time:2006-1-2 15:04:05.000} - %{pid} - %{longfile} - %{level:.4s} - %{message}`,
 )
 
 // InitLogger ...
@@ -23,15 +23,15 @@ func initLogger() {
 
 	backend := logging.NewLogBackend(logFile, "", 0)
 	formatter := logging.NewBackendFormatter(backend, format)
-	logging.SetBackend(backend, formatter)
+	logging.SetBackend(formatter)
 
-	Logger = logging.MustGetLogger("camerRecord")
+	logger = logging.MustGetLogger("camerRecord")
 }
 
 // GetLogger ...
 func GetLogger() *logging.Logger {
-	if Logger == nil {
+	if logger == nil {
 		initLogger()
 	}
-	return Logger
+	return logger
 }

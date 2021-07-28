@@ -31,7 +31,7 @@ func main() {
 
 		go func(camer_ config.Camer) {
 			for {
-				err := rtsp.Record(camer_.URL, filePath, camer_.VideoSegmentTime)
+				err := rtsp.RecordV2(camer_.URL, filePath, camer_.VideoSegmentTime)
 				logger.Error(err)
 			}
 		}(camer)

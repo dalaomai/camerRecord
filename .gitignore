@@ -5,3 +5,5 @@
 _*
 dist/
 dev.go
+.history
+.temp
