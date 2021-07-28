@@ -12,8 +12,8 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v1
 
-      - name: Set nasm
-        uses: ilammy/setup-nasm@v1
+      # - name: Set nasm
+      #   uses: ilammy/setup-nasm@v1
 
       - name: Get FFmpeg
         uses: ./.github/actions/ffmpeg-action
