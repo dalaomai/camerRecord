@@ -1,0 +1,15 @@
+name: Get FFmpeg
+
+author: mai@dalaomai.cn
+
+description: nothing
+
+inputs:
+  ffmpeg_version:
+    required: false
+    default: '3.0.1'
+
+runs:
+  using: "composite"
+  steps:
+    - run: wget https://ffmpeg.org/releases/ffmpeg-3.0.2.tar.gz
