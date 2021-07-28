@@ -17,7 +17,7 @@ runs:
       shell: bash
     - run: tar -zxf ffmpeg-3.0.2.tar.gz
       shell: bash
-    - run: cd ./ffmpeg-3.0.2 && ./configure --disable-static --enable-shared && sudo make && sudo make install
+    - run: cd ./ffmpeg-3.0.2 && ./configure --disable-static --enable-shared && make && sudo make install
       shell: bash
     # - run: sudo cp -r ffmpeg-3.0.2/lib* /usr/local/include/
     #   shell: bash
