@@ -6,10 +6,12 @@ description: nothing
 
 inputs:
   ffmpeg_version:
+    description: version
     required: false
-    default: '3.0.1'
+    default: "3.0.1"
 
 runs:
   using: "composite"
   steps:
     - run: wget https://ffmpeg.org/releases/ffmpeg-3.0.2.tar.gz
+      shell: bash

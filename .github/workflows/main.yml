@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get FFmpeg
-        uses: ./.github/actions/ffmpeg
+        uses: ./.github/actions/ffmpeg-action
 
       - name: Set up Go
         uses: actions/setup-go@v1
