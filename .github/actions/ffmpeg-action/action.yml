@@ -13,13 +13,13 @@ inputs:
 runs:
   using: "composite"
   steps:
-    # - run: wget -q https://ffmpeg.org/releases/ffmpeg-3.0.2.tar.gz
-    #   shell: bash
-    # - run: tar -zxf ffmpeg-3.0.2.tar.gz
-    #   shell: bash
+    - run: wget -q https://ffmpeg.org/releases/ffmpeg-3.0.2.tar.gz
+      shell: bash
+    - run: tar -zxf ffmpeg-3.0.2.tar.gz
+      shell: bash
     # - run: cd ./ffmpeg-3.0.2 && ./configure && make && make install
     #   shell: bash
-    # - run: sudo cp -r ffmpeg-3.0.2/lib* /usr/local/include/
-    #   shell: bash
+    - run: sudo cp -r ffmpeg-3.0.2/lib* /usr/local/include/
+      shell: bash
     - run: sudo apt install ffmpeg libavcodec-dev libavformat-dev libavdevice-dev
       shell: bash
