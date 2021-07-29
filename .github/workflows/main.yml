@@ -24,4 +24,4 @@ jobs:
           go-version: 1.15.6
 
       - name: Build
-        run: make build
+        run: go build .
