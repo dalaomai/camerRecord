@@ -44,7 +44,7 @@ jobs:
         id: cache_ffmpeg
         with:
           path: |
-            **/ffmpeg-${{ env.FFMPEG_VERSION }}
+            ~/ffmpeg-${{ env.FFMPEG_VERSION }}
           key: ${{ runner.os }}-ffmpeg-${{ env.FFMPEG_VERSION }}
 
       - name: Build FFmpeg
@@ -54,7 +54,7 @@ jobs:
           ffmpeg_version: ${{ env.FFMPEG_VERSION }}
 
       - name: Install FFmpeg
-        run: cd ./ffmpeg-${{ env.FFMPEG_VERSION }} && sudo make install
+        run: cd ~/ffmpeg-${{ env.FFMPEG_VERSION }} && sudo make install
 
       - name: Cache GO MOD
         uses: actions/cache@v2
