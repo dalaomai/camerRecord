@@ -21,8 +21,5 @@ runs:
       shell: bash
     - run: cd ./ffmpeg-3.0.2 && sudo ./configure --enable-gpl --enable-shared --disable-programs --disable-doc --enable-avresample && sudo make -j4 && sudo make install
       shell: bash
-    # - run: sudo cp -r ffmpeg-3.0.2/lib* /usr/local/include/
-    #   shell: bash
-    # - run: sudo apt update && sudo apt install libavutil-dev libavcodec-dev libavformat-dev libavdevice-dev -y
-    #   shell: bash
+
  

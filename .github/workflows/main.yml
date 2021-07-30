@@ -20,14 +20,11 @@ jobs:
       - name: Get FFmpeg
         uses: ./.github/actions/ffmpeg-action
 
-      - name: Setup Debug Session
-        uses: P3TERX/ssh2actions@main
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-
-      # - name: Build
-      #   run: go build .
+      # - name: Setup Debug Session
+      #   uses: P3TERX/ssh2actions@main
+      #   env:
+      #     TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      #     TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
       - name: Create release
         uses: goreleaser/goreleaser-action@v2
