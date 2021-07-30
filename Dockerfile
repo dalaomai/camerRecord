@@ -1,4 +1,4 @@
-FROM scratch
+FROM alpine:last
 
 ENV RUN_PATH /camerRecord
 
