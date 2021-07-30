@@ -25,14 +25,17 @@ jobs:
         id: cache_ffmpeg
         with:
           path: |
-            ./ffmpeg-${{ env.FFMPEG_VERSION }}
+            **/ffmpeg-${{ env.FFMPEG_VERSION }}
           key: ${{ runner.os }}-ffmpeg-${{ env.FFMPEG_VERSION }}
 
-      - name: Get FFmpeg
+      - name: Build FFmpeg
         if: steps.cache_ffmpeg.outputs.cache-hit != 'true'
-        uses: ./.github/actions/ffmpeg-action
+        uses: ./.github/actions/build_ffmpeg
         with:
           ffmpeg_version: ${{ env.FFMPEG_VERSION }}
+
+      - name: Install FFmpeg
+        run: cd ./ffmpeg-${{ ffmpeg_version }} && sudo make install
 
       # - name: Setup Debug Session
       #   uses: P3TERX/ssh2actions@main
