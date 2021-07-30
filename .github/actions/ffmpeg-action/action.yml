@@ -19,7 +19,7 @@ runs:
       shell: bash
     - run: tar -zxf ffmpeg-3.0.2.tar.gz
       shell: bash
-    - run: cd ./ffmpeg-3.0.2 && sudo ./configure --enable-avresample && sudo make -j4 && sudo make install
+    - run: cd ./ffmpeg-3.0.2 && sudo ./configure --enable-gpl --enable-shared --disable-programs --disable-doc --enable-avresample && sudo make -j4 && sudo make install
       shell: bash
     # - run: sudo cp -r ffmpeg-3.0.2/lib* /usr/local/include/
     #   shell: bash
