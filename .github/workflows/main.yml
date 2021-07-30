@@ -54,9 +54,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
 
-      - name: Create release
-        uses: goreleaser/goreleaser-action@v2
-        with:
-          args: release --snapshot --skip-publish --rm-dist
-        env:
-          GITHUB_TOKEN: ${{secrets.RELESE_TOEN}}
+      # - name: Create release
+      #   uses: goreleaser/goreleaser-action@v2
+      #   with:
+      #     args: release --snapshot --skip-publish --rm-dist
+      #   env:
+      #     GITHUB_TOKEN: ${{secrets.RELESE_TOEN}}
+
+      - name: Build
+        run: go build --ldflags "-extldflags -static" .
