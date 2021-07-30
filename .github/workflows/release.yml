@@ -4,6 +4,9 @@ on:
     tags:
       - v*
 
+env:
+  FFMPEG_VERSION: "3.0.1"
+
 jobs:
   goreleaser:
     name: Release on GitHub
