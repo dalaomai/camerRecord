@@ -1,4 +1,4 @@
-FROM alpine:last
+FROM alpine:3.14
 
 ENV RUN_PATH /camerRecord
 
