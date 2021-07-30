@@ -17,9 +17,9 @@ runs:
       shell: bash
     - run: echo wget -q https://ffmpeg.org/releases/ffmpeg-${{ inputs.ffmpeg_version }}.tar.gz
       shell: bash
-    - run: tar -zxf ffmpeg-${{ env.INPUT_FFMPEG_VERSION }}.tar.gz
+    - run: tar -zxf ffmpeg-${{ inputs.ffmpeg_version }}.tar.gz
       shell: bash
-    - run: cd ./ffmpeg-${{ env.INPUT_FFMPEG_VERSION }} && sudo ./configure --enable-gpl --enable-shared --disable-programs --disable-doc --enable-avresample && sudo make -j4 && sudo make install
+    - run: cd ./ffmpeg-${{ inputs.ffmpeg_version }} && sudo ./configure --enable-gpl --enable-shared --disable-programs --disable-doc --enable-avresample && sudo make -j4 && sudo make install
       shell: bash
 
  
