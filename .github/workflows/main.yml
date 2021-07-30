@@ -35,7 +35,7 @@ jobs:
           ffmpeg_version: ${{ env.FFMPEG_VERSION }}
 
       - name: Install FFmpeg
-        run: cd ./ffmpeg-${{ ffmpeg_version }} && sudo make install
+        run: cd ./ffmpeg-${{ env.FFMPEG_VERSION }} && sudo make install
 
       # - name: Setup Debug Session
       #   uses: P3TERX/ssh2actions@main
