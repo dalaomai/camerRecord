@@ -5,7 +5,7 @@ on:
       - v*
 
 env:
-  FFMPEG_VERSION: "3.0.1"
+  FFMPEG_VERSION: "3.0.2"
 
 jobs:
   goreleaser:
@@ -37,10 +37,35 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: 1.15
+          go-version: 1.15.6
 
-      - name: Get FFmpeg
-        uses: ./.github/actions/ffmpeg-action
+      - name: Cache FFmpeg
+        uses: actions/cache@v2
+        id: cache_ffmpeg
+        with:
+          path: |
+            **/ffmpeg-${{ env.FFMPEG_VERSION }}
+          key: ${{ runner.os }}-ffmpeg-${{ env.FFMPEG_VERSION }}
+
+      - name: Build FFmpeg
+        if: steps.cache_ffmpeg.outputs.cache-hit != 'true'
+        uses: ./.github/actions/build_ffmpeg
+        with:
+          ffmpeg_version: ${{ env.FFMPEG_VERSION }}
+
+      - name: Install FFmpeg
+        run: cd ./ffmpeg-${{ env.FFMPEG_VERSION }} && sudo make install
+
+      - name: Cache GO MOD
+        uses: actions/cache@v2
+        id: cache_gomod
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
 
       - name: Create release on GitHub
         uses: goreleaser/goreleaser-action@v2
