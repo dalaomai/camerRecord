@@ -45,7 +45,7 @@ jobs:
         with:
           path: |
             ~/ffmpeg-${{ env.FFMPEG_VERSION }}
-          key: ${{ runner.os }}-ffmpeg-${{ env.FFMPEG_VERSION }}
+          key: ${{ runner.os }}-ffmpeg-${{ env.FFMPEG_VERSION }}-${{ hashFiles('**/.github/actions/build_ffmpeg') }}
 
       - name: Build FFmpeg
         if: steps.cache_ffmpeg.outputs.cache-hit != 'true'
