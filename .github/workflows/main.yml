@@ -48,11 +48,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
 
-      - name: Setup Debug Session
-        uses: P3TERX/ssh2actions@main
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      # - name: Setup Debug Session
+      #   uses: P3TERX/ssh2actions@main
+      #   env:
+      #     TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      #     TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
       - name: Create release
         uses: goreleaser/goreleaser-action@v2
