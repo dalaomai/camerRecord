@@ -19,7 +19,9 @@ runs:
       shell: bash
     - run: tar -zxf ~/ffmpeg-${{ inputs.ffmpeg_version }}.tar.gz -C ~
       shell: bash
-    - run: cd ~/ffmpeg-${{ inputs.ffmpeg_version }} && sudo ./configure --enable-gpl --enable-shared --disable-programs --disable-doc --enable-avresample && sudo make -j4 && sudo make install
+    - run: cd ~/ffmpeg-${{ inputs.ffmpeg_version }} && sudo ./configure --enable-gpl --enable-pic --disable-bzlib --disable-zlib --disable-programs --disable-doc --enable-avresample && sudo make -j4 && sudo make install
       shell: bash
 
- 
+# ./configure --enable-gpl --enable-pic --disable-bzlib --disable-zlib --disable-programs --disable-doc --enable-avresample
+
+# --enable-version3 --enable-nonfree

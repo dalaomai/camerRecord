@@ -7,9 +7,9 @@ import (
 	"path"
 	"time"
 
-	"github.com/deepch/vdk/av"
-	mp4 "github.com/deepch/vdk/format/mp4m"
-	"github.com/deepch/vdk/format/rtspv2"
+	"github.com/dalaomai/vdk/av"
+	mp4 "github.com/dalaomai/vdk/format/mp4m"
+	"github.com/dalaomai/vdk/format/rtspv2"
 )
 
 const (

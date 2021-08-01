@@ -14,7 +14,7 @@ import (
 
 	"camerRecord/logging"
 
-	"github.com/deepch/vdk/cgo/ffmpeg"
+	"github.com/dalaomai/vdk/cgo/ffmpeg"
 )
 
 var logger = logging.GetLogger()
