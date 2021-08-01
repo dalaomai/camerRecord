@@ -13,3 +13,10 @@ docker run -d \
 -v {保存日志文件}:/camerRecord/{.log} \
 dalaomai/camer-record:latest
 ```
+```
+docker run -d \
+-v /root/camerRecord/.config/:/camerRecord/.config \
+-v /root/camerRecord/.temp/docker_videos:/camerRecord/.temp/video \
+-v /root/camerRecord/.log/:/camerRecord/.log \
+dalaomai/camer-record:latest
+```
