@@ -22,6 +22,6 @@ runs:
     - run: cd ~/ffmpeg-${{ inputs.ffmpeg_version }} && sudo ./configure --enable-gpl --enable-pic --disable-lzma --disable-bzlib --disable-zlib --disable-programs --disable-doc --enable-avresample && sudo make -j4 && sudo make install
       shell: bash
 
-# ./configure --enable-gpl --enable-pic --disable-bzlib --disable-zlib --disable-programs --disable-doc --enable-avresample
+# ./configure --enable-shared --enable-gpl --enable-pic --disable-lzma --disable-bzlib --disable-zlib --disable-programs --disable-doc --enable-avresample
 
 # --enable-version3 --enable-nonfree
